@@ -11,14 +11,36 @@ jobs:
       - uses: chartboost/ruff-action@v1
 
   test:
-    name: Run Unittests
+    name: Run Django Tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: testdb
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python 3
         uses: actions/setup-python@v2
         with:
           python-version: "3.8"
-      - name: Run unittest
+      - name: Install Dependencies
         run: |
-          python -m unittest discover
+          pip install -r requirements.txt
+      - name: Set up Django
+        env:
+          DATABASE_URL: postgres://user:password@localhost:5432/testdb
+        run: |
+          python manage.py migrate
+      - name: Run Django Tests
+        run: |
+          python manage.py test calculator
