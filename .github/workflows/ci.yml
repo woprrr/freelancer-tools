@@ -13,20 +13,6 @@ jobs:
   test:
     name: Run Django Tests
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_DB: testdb
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python 3
@@ -36,11 +22,14 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
-      - name: Set up Django
-        env:
-          DATABASE_URL: postgres://user:password@localhost:5432/testdb
+
+      - name: Run Tests and Generate HTML Coverage Report
         run: |
-          python manage.py migrate
-      - name: Run Django Tests
-        run: |
-          python manage.py test calculator
+          coverage run manage.py test
+          coverage html  # Génère un rapport HTML
+
+      - name: Upload Coverage HTML Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: html-coverage-report
+          path: htmlcov/
