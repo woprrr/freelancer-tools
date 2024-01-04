@@ -6,4 +6,4 @@ class Messages:
     NO_MODIFICATION = "\n🚫 Aucune modification apportée."
     INVALID_CHOICE = "❗ Veuillez répondre par 'oui' ou 'non'."
     ADJUST_MODIFY_DAYS = "\n===== Ajustement du Nombre de Jours Travaillés ====="
-    REM_TITLE="\n===== Calcul de Votre Rémunération Freelance ====="
+    REM_TITLE = "\n===== Calcul de Votre Rémunération Freelance ====="

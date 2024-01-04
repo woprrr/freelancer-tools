@@ -1,7 +1,8 @@
-import unittest
-from business_logic import calculate_monthly_income, adjust_dar
+from django.test import TestCase
+from calculator.shared.business_logic import calculate_monthly_income, adjust_dar
 
-class TestBusinessLogic(unittest.TestCase):
+
+class TestBusinessLogic(TestCase):
     def test_calculate_monthly_income(self):
         self.assertEqual(calculate_monthly_income(500, 5), 10000)
         self.assertEqual(calculate_monthly_income(1000, 4), 16000)
@@ -10,6 +11,3 @@ class TestBusinessLogic(unittest.TestCase):
     def test_adjust_dar(self):
         self.assertEqual(adjust_dar(10000, 4), 625.0)
         self.assertEqual(adjust_dar(16000, 5), 800)
-
-if __name__ == '__main__':
-    unittest.main()
