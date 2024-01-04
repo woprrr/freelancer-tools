@@ -1,1 +1,8 @@
-# For future usage
+# Framework
+Django>=3.2,<4.0 
+# SGBD
+psycopg2-binary>=2.8
+# Testing
+coverage>=5.3
+# Sécurity
+django-secure
