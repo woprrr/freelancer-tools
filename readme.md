@@ -2,14 +2,18 @@
 
 Ce projet est un outil de calcul de rémunération pour les freelances. Il permet de calculer la rémunération mensuelle basée sur le Taux Journalier Moyen (TJM) et le nombre de jours travaillés par semaine. 
 
-Il offre également la possibilité d'ajuster le TJM pour maintenir le même revenu mensuel tout en modifiant le nombre de jours de travail.
+Il offre également la possibilité d'ajuster le TJM pour maintenir le même revenu mensuel tout en modifiant le nombre de jours de travail. Ce projet inclut également une application Django pour une interface web interactive.
 
 ## Fonctionnalités
 
 - Calcul de la rémunération mensuelle en fonction du TJM et du nombre de jours de travail par semaine.
 - Ajustement du TJM pour maintenir la même rémunération en modifiant le nombre de jours de travail.
+- CommandeLine Django pour une utilisation en ligne de commmande.
+- Interface web Django pour une utilisation facile et interactive. (En cours)
 
 ## Comment l'utiliser
+
+### Utilisation de l'Application Web & Commande shell
 
 1. Clonez le dépôt :
    ```bash
@@ -19,37 +23,44 @@ Il offre également la possibilité d'ajuster le TJM pour maintenir le même rev
    ```bash
    cd freelancer-tools
    ```
-3. Exécutez le script principal :
+3. Assurez-vous que Django est installé ou exécutez :
    ```bash
-   python main_script.py
+   pip install -r requirements.txt
    ```
+4. Pour utiliser la commande personnalisée, exécutez :
+   ```bash
+   python manage.py freelance_calculate
+   ```
+5. Pour lancer le serveur Django et utiliser l'interface web, exécutez :
+   ```bash
+   python manage.py runserver
+   ```
+6. Accédez à l'application via un navigateur web à l'adresse `http://localhost:8000`.
 
-## Exemple d'Utilisation
+### Dans l'Application Web
 
-Lorsque vous exécutez `main_script.py`, le script vous demandera :
-
-1. Votre Taux Journalier Moyen (en euros).
-2. Le nombre de jours de travail par semaine.
-3. Si vous souhaitez modifier le nombre de jours travaillés tout en conservant votre revenu mensuel (réponse oui/non).
-4. Le nouveau nombre de jours de travail par semaine (si vous avez répondu oui à la question précédente).
+Suivez les instructions à l'écran dans l'interface web pour effectuer des calculs de rémunération.
 
 ## Tests
 
-Des tests unitaires et fonctionnels sont inclus. Pour les exécuter :
+Des tests unitaires et fonctionnels sont inclus pour les composants Django. Pour exécuter les tests avec coverage :
 
 ```bash
-python -m unittest test_business_logic.py test_main_script.py
+coverage run --source='.' manage.py test
+coverage report
 ```
 
-ou pour jouer toute la suite d'un coup.
+Pour générer un rapport en HTML :
 
 ```bash
-python -m unittest
+coverage html
 ```
+
+Les rapports HTML seront disponibles dans le dossier `htmlcov`.
 
 ## Contributions
 
-Les contributions sont les bienvenues. Veuillez suivre les bonnes pratiques de développement et maintenir la qualité du code.
+Les contributions sont les bienvenues. Veuillez suivre les bonnes pratiques de développement Python et maintenir la qualité du code.
 
 ## Licence
 
